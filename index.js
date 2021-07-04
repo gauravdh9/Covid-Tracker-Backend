@@ -3,7 +3,7 @@ require("dotenv").config();
 const typeDefs = require("./GraphQl/typeDef");
 const resolvers = require("./GraphQl/Resolver");
 const mongoose = require("mongoose");
-// const CovidData = require("./models/DataModel");
+const CovidData = require("./models/DataModel");
 const cors = require("cors");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
