@@ -47,7 +47,6 @@ module.exports = `
 
   type Query {
     getData(start:String!,end:String!):[Data]
-    search(email: String!): User
     login(email: String!, password: String!): Auth
     getTotalData:totalResponse
 
