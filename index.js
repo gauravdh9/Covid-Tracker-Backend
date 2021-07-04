@@ -3,13 +3,12 @@ require("dotenv").config();
 const typeDefs = require("./GraphQl/typeDef");
 const resolvers = require("./GraphQl/Resolver");
 const mongoose = require("mongoose");
-const CovidData = require("./models/DataModel");
+// const CovidData = require("./models/DataModel");
 const cors = require("cors");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 
 const { makeExecutableSchema } = require("graphql-tools");
-const newData = require("./temp");
 const schema = makeExecutableSchema({
   typeDefs: typeDefs,
   resolvers: resolvers,
@@ -32,6 +31,13 @@ var app = express();
 
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome To Covid Tracker Backend Api",
+    graphiql: "https://covid-trackerbackend.herokuapp.com/graphql",
+  });
+});
+
 app.use(
   "/graphql",
   graphqlHTTP({
@@ -39,13 +45,6 @@ app.use(
     graphiql: true,
   })
 );
-
-app.get("/data", async (req, res) => {
-  console.log(newData);
-
-  await CovidData.insertMany(newData);
-  res.send("posted succesfully");
-});
 
 app.listen(PORT, () => console.log("app running on ", PORT));
 
